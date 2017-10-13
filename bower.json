@@ -5,7 +5,7 @@
     "choi young <ho4040@nooslab.com>"
   ],
   "description": "basic curve editor for angular 1",
-  "main": "./src/ng-curve.js",
+  "main": "src/ng-curve.js",
   "keywords": [
     "curve"
   ],

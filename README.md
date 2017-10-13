@@ -11,16 +11,8 @@ Directive that is created for AngularJS 1.
 # installation
 ---
 
-you can do either
-
-```
+```bash
 bower install ng-curve
-```
-
-or
-
-```
-npm install ng-curve --save
 ```
 
 Then include the CSS file and javascript file
