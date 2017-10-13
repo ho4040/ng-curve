@@ -18,7 +18,7 @@ Then include the CSS file and javascript file
 
 ```html
 <link rel="stylesheet" href="bower_components/ng-curve/dist/ng-curve.css" />
-<script src="bower_components/ng-curve/dist/ng-curve.js"></script>
+<script src="bower_components/ng-curve/dist/ng-curve.min.js"></script>
 ```
 
 # Usage
