@@ -9,7 +9,6 @@ Directive that is created for AngularJS 1.
 
 
 # installation
----
 
 ```bash
 bower install ng-curve
@@ -23,7 +22,7 @@ Then include the CSS file and javascript file
 ```
 
 # Usage
----
+
 Include `ngCurve` in your app's dependencies:
 
 ```javascript
@@ -37,5 +36,5 @@ And the directive to your page like this :
 ```
 
 # Todo
-----
+
 * draw as curve
