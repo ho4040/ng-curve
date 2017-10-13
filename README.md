@@ -1,11 +1,12 @@
 
 ## ng-curve
 
-Curve edit control.
+Curve edit control. Directive that is created for AngularJS 1.
 
-Directive that is created for AngularJS 1.
+check Demo [here](https://ho4040.github.io/ng-curve/demo.html).
 
 ![asdf](https://i.imgur.com/77fgia2.png)
+
 
 ### Control Commands
 * `click` : add point
