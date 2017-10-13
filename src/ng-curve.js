@@ -97,30 +97,34 @@ angular.module('ngCurve', []).directive('curveEditor', function($timeout){
 					ctx.stroke();
 				});
 				
-				ctx.beginPath();
+				scope.drawLine(dots, ctx, canvas);
+				
+			}
+
+			scope.drawLine = function(dots, ctx, scale)
+			{
+			  ctx.beginPath();
 				ctx.strokeStyle = '#000000';
 				
 				if(dots[0].x > 0)
 				{
-					ctx.moveTo(0, dots[0].y*canvas.height);
-					ctx.lineTo(dots[0].x*canvas.width, dots[0].y*canvas.height);
+					ctx.moveTo(0, dots[0].y*scale.height);
+					ctx.lineTo(dots[0].x*scale.width, dots[0].y*scale.height);
 				}
 				
 				for(var i=0;i<dots.length-1;i++){
 					var dot1 = dots[i];
 					var dot2 = dots[i+1];
-					ctx.moveTo(dot1.x*canvas.width, dot1.y*canvas.height);
-					ctx.lineTo(dot2.x*canvas.width, dot2.y*canvas.height);
+					ctx.moveTo(dot1.x*scale.width, dot1.y*scale.height);
+					ctx.lineTo(dot2.x*scale.width, dot2.y*scale.height);
 				}
 				
 				if(dots[dots.length-1].x < 1)
 				{
-					ctx.moveTo(dots[dots.length-1].x*canvas.width, dots[dots.length-1].y*canvas.height);
-					ctx.lineTo(scope.size.width, dots[dots.length-1].y*canvas.height);
+					ctx.moveTo(dots[dots.length-1].x*scale.width, dots[dots.length-1].y*canvas.height);
+					ctx.lineTo(scope.size.width, dots[dots.length-1].y*scale.height);
 				}
-				
 				ctx.stroke();
-				
 			}
 			
 			element.ready(function(){
