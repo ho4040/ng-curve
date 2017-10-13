@@ -16,11 +16,15 @@
 	</head>
 
 	<body ng-app="app">
+		<h1>ng-curve</h1>
 		<div ng-controller="MainCtrl">
 			<curve-editor dot-data="input.dots"></curve-editor>
 			<div ng-repeat="dot in input.dots track by $index">
 				{{$index}} : {{dot}}
 			</div>
+		</div>
+		<div>
+			<a href="https://github.com/ho4040/ng-curve">https://github.com/ho4040/ng-curve</a>
 		</div>
 	</body>
 
