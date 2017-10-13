@@ -8,7 +8,7 @@ Directive that is created for AngularJS 1.
 ![asdf](https://i.imgur.com/77fgia2.png)
 
 
-# installation
+# Installation
 
 ```bash
 bower install ng-curve
