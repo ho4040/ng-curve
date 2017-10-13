@@ -1,0 +1,13 @@
+{
+  "name": "ng-curve",
+  "homepage": "https://github.com/ho4040/ng-curve",
+  "authors": [
+    "choi young <ho4040@nooslab.com>"
+  ],
+  "description": "basic curve editor for angular 1",
+  "main": "./src/ng-curve.js",
+  "keywords": [
+    "curve"
+  ],
+  "license": "MIT"
+}
