@@ -16,7 +16,7 @@ Directive that is created for AngularJS 1.
 # Installation
 
 ```bash
-bower install ng-curve
+bower install ng-curve --save
 ```
 
 Then include the CSS file and javascript file
