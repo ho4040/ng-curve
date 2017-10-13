@@ -42,5 +42,6 @@ And the directive to your page like this :
 
 # Todo
 
-* draw as curve
-
+* options for changing design 
+* options for grid color setting
+* options for maintain aspect ratio of grid or not
