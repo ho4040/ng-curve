@@ -41,7 +41,7 @@ And the directive to your page like this :
 ```
 
 # Todo
-
+* options for spline mode
 * options for changing design 
 * options for grid color setting
 * options for maintain aspect ratio of grid or not
