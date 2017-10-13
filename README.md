@@ -7,6 +7,11 @@ Directive that is created for AngularJS 1.
 
 ![asdf](https://i.imgur.com/77fgia2.png)
 
+### Control Commands
+* `click` : add point
+*  `drag` : move point
+*  `ctrl + click` or `drag-out` : remove point
+
 
 # Installation
 
@@ -38,3 +43,4 @@ And the directive to your page like this :
 # Todo
 
 * draw as curve
+
