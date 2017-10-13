@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script data-require="angular.js@1.6.5" data-semver="1.6.5" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+
+		<link rel="stylesheet" href="dist/ng-curve.css" />
+		<script src="dist/ng-curve.min.js"></script>
+
+		<script>
+			angular.module('app', ['ngCurve']).controller('MainCtrl', function($scope){
+				$scope.input = {};
+			});
+		</script>
+		
+	</head>
+
+	<body ng-app="app">
+		<div ng-controller="MainCtrl">
+			<curve-editor dot-data="input.dots"></curve-editor>
+			<div ng-repeat="dot in input.dots track by $index">
+				{{$index}} : {{dot}}
+			</div>
+		</div>
+	</body>
+
+</html>
