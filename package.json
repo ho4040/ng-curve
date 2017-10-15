@@ -1,0 +1,27 @@
+{
+  "name": "ng-curve-demo",
+  "version": "1.0.0",
+  "description": "demo page for ng-curve",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ho4040/ng-curve.git"
+  },
+  "keywords": [
+    "ng-curve"
+  ],
+  "author": "young choi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ho4040/ng-curve/issues"
+  },
+  "homepage": "https://github.com/ho4040/ng-curve#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-live-server": "0.0.31",
+    "gulp-livereload": "^3.8.1"
+  }
+}

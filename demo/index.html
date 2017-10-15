@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
-		<link rel="stylesheet" href="bower_components/ng-curve/dist/ng-curve.css" />	
-		<script src="bower_components/cardinal-spline-js/curve.min.js"></script>
+		<link rel="stylesheet" href="bower_components/ng-curve/dist/ng-curve.css" />
 		<script src="bower_components/angular/angular.js"></script>
-		<script src="bower_components/ng-curve/dist/ng-curve.min.js"></script>
+		<script src="bower_components/cardinal-spline-js/curve.min.js"></script>
+		<script src="bower_components/ng-curve/dist/ng-curve.js"></script>
 
 		<script>
 			angular.module('app', ['ngCurve']).controller('MainCtrl', function($scope){
@@ -16,6 +15,7 @@
 	</head>
 
 	<body ng-app="app">
+		<H1>ng-curve demo</H1>
 		<div ng-controller="MainCtrl">
 			<curve-editor dot-data="input.dots"></curve-editor>
 			<div ng-repeat="dot in input.dots track by $index">

@@ -21,7 +21,6 @@
     "commit": "90e63fbc18872d194ee5eb975473727faed2b6b9"
   },
   "_source": "https://github.com/epistemex/cardinal-spline-js.git",
-  "_target": "^2.3.7",
-  "_originalSource": "cardinal-spline-js",
-  "_direct": true
+  "_target": ">=2.3.0",
+  "_originalSource": "cardinal-spline-js"
 }
