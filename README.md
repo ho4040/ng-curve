@@ -3,9 +3,9 @@
 
 Curve edit control. Directive that is created for AngularJS 1.
 
-check Demo [here](https://ho4040.github.io/ng-curve/demo.html).
+check Demo [here](https://ho4040.github.io/ng-curve/demo/index.html).
 
-![asdf](https://i.imgur.com/77fgia2.png)
+![ss](https://i.imgur.com/xS2Qgx0.png)
 
 
 ### Control Commands
@@ -26,6 +26,11 @@ Then include the CSS file and javascript file
 <link rel="stylesheet" href="bower_components/ng-curve/dist/ng-curve.css" />
 <script src="bower_components/ng-curve/dist/ng-curve.min.js"></script>
 ```
+
+# Dependency
+
+* [cardinal-spline-js](https://github.com/epistemex/cardinal-spline-js)
+
 
 # Usage
 
