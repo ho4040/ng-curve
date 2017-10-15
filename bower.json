@@ -7,7 +7,7 @@
   "description": "simple curve editor for angular 1",
   "main": "src/ng-curve.js",
   "dependencies":{
-    "cardinal-spline-js":">=0.0.1"
+    "cardinal-spline-js":">=2.3.0"
   },
   "keywords": [
     "curve",
