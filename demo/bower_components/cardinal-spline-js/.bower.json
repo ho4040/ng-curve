@@ -1,0 +1,27 @@
+{
+  "name": "cardinal-spline-js",
+  "description": "Smooth line through points for JavaScript / HTML5 Canvas",
+  "main": "src/curve.js",
+  "keywords": [
+    "cardinal",
+    "spline",
+    "bezier",
+    "catmull-rom"
+  ],
+  "authors": [
+    "Ken Nilsen (github@epistemex.com)"
+  ],
+  "license": "MIT",
+  "homepage": "https://gitlab.com/epistemex/cardinal-spline-js",
+  "version": "2.3.7",
+  "_release": "2.3.7",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.3.7",
+    "commit": "90e63fbc18872d194ee5eb975473727faed2b6b9"
+  },
+  "_source": "https://github.com/epistemex/cardinal-spline-js.git",
+  "_target": "^2.3.7",
+  "_originalSource": "cardinal-spline-js",
+  "_direct": true
+}

@@ -2,10 +2,10 @@
 <html>
 
 	<head>
-		<script data-require="angular.js@1.6.5" data-semver="1.6.5" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
-
-		<link rel="stylesheet" href="dist/ng-curve.css" />
-		<script src="dist/ng-curve.js"></script>
+		<link rel="stylesheet" href="bower_components/ng-curve/dist/ng-curve.css" />	
+		<script src="bower_components/cardinal-spline-js/curve.min.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/ng-curve/dist/ng-curve.min.js"></script>
 
 		<script>
 			angular.module('app', ['ngCurve']).controller('MainCtrl', function($scope){
@@ -16,15 +16,11 @@
 	</head>
 
 	<body ng-app="app">
-		<h1>ng-curve</h1>
 		<div ng-controller="MainCtrl">
 			<curve-editor dot-data="input.dots"></curve-editor>
 			<div ng-repeat="dot in input.dots track by $index">
 				{{$index}} : {{dot}}
 			</div>
-		</div>
-		<div>
-			<a href="https://github.com/ho4040/ng-curve">https://github.com/ho4040/ng-curve</a>
 		</div>
 	</body>
 
