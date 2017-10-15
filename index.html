@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="dist/ng-curve.css">
+		<script data-require="angular.js@1.6.5" data-semver="1.6.5" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+		<script src="node_modules/cardinal-spline-js/curve.js"></script>
+		<script src="dist/ng-curve.min.js"></script>
+		
+		<script>
+			angular.module('app', ['ngCurve']).controller('MainCtrl', function($scope){
+				
+			});
+		</script>
+	</head>
+
+	<body ng-app="app" style="margin-top:20px;">
+		<h1>TEST</h1>
+		<div ng-controller="MainCtrl">
+			<curve-editor dot-data="input.dots"></curve-editor>
+			<div ng-repeat="dot in input.dots track by $index">
+				{{$index}} : {{dot.x | number:2}}, {{dot.y | number:2}}
+			</div>
+		</div>
+	</body>
+
+</html>
