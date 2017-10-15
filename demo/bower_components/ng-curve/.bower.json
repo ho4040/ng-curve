@@ -17,11 +17,11 @@
     "catmull-rom"
   ],
   "license": "MIT",
-  "_release": "46e0922964",
+  "_release": "b17e546eab",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "46e0922964e3a9d5959c70d23c70c0061aac5b27"
+    "commit": "b17e546eabc04ce32d0c2ffb193c6d27d948c904"
   },
   "_source": "https://github.com/ho4040/ng-curve.git",
   "_target": "*",

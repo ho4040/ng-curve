@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 	<head>
 		<link rel="stylesheet" href="bower_components/ng-curve/dist/ng-curve.css" />
 		<script src="bower_components/angular/angular.js"></script>
@@ -9,19 +9,37 @@
 		<script>
 			angular.module('app', ['ngCurve']).controller('MainCtrl', function($scope){
 				$scope.input = {};
+				$scope.input.dots = [
+					{"x":0,"y":1},
+					{"x":0.1342281879194631,"y":0.5606060606060606},
+					{"x":0.3523489932885906,"y":0.7828282828282829},
+					{"x":0.46308724832214765,"y":0.35353535353535354},
+					{"x":0.7248322147651006,"y":0.5353535353535354},
+					{"x":1,"y":0}
+				];
 			});
 		</script>
+
+		<style>
+			.curve-control {
+				width:300px;
+				height:200px;
+			}
+		</style>
 		
 	</head>
 
-	<body ng-app="app">
+	<body ng-controller="MainCtrl">
 		<H1>ng-curve demo</H1>
-		<div ng-controller="MainCtrl">
-			<curve-editor dot-data="input.dots"></curve-editor>
+
+		<curve-editor dot-data="input.dots"></curve-editor>
+
+		<div style="padding:10px;">
 			<div ng-repeat="dot in input.dots track by $index">
 				{{$index}} : {{dot}}
 			</div>
 		</div>
+
 	</body>
 
 </html>
