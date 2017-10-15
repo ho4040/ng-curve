@@ -46,6 +46,18 @@ And the directive to your page like this :
 <curve-editor dot-data="input.dots"></curve-editor>
 ```
 
+Change editor size with `curve-control` class
+
+```html
+<style>
+  .curve-control
+  {
+    width:320px;
+    height:240px;
+  }
+</style>
+```
+
 # Todo
 * options for spline mode
 * options for changing design 
