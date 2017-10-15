@@ -1,220 +1,187 @@
-angular.module('ngCurve', []).directive('curveEditor', function($timeout){
+'use strict';
+
+angular.module('ngCurve', []).directive('curveEditor', function ($timeout) {
 	return {
-		restrict:"E",
-		scope:{
-			dotData:"@"
+		restrict: "E",
+		scope: {
+			dotData: "@"
 		},
-		template:"<div><canvas id='grid'></canvas><canvas id='dots'></canvas></div>",
-		link:function(scope, element, attrs){
-			
+		template: "<div><canvas id='grid'></canvas><canvas id='dots'></canvas></div>",
+		link: function link(scope, element, attrs) {
+
 			element.addClass('curve-control');
-			
-			var addDot = function(rx,ry){
-				
-				var newDot = {x:rx / scope.size.width, y:ry / scope.size.height};
-				
+
+			var addDot = function addDot(rx, ry) {
+
+				var newDot = { x: rx / scope.size.width, y: ry / scope.size.height };
+
 				scope.dots.push(newDot);
-				scope.dots.sort(function(a,b){
-					return a.x-b.x;
+				scope.dots.sort(function (a, b) {
+					return a.x - b.x;
 				});
-				
+
 				return newDot;
-				
-			}
-			
-			var findDot = function(x,y){
-				return scope.dots.find(function(dot){
+			};
+
+			var findDot = function findDot(x, y) {
+				return scope.dots.find(function (dot) {
 					var rx = dot.x * scope.size.width;
 					var ry = dot.y * scope.size.height;
-					return (Math.abs(rx-x) < 5 &&Math.abs(ry-y) < 5);
-				})
-			}
-			
-			var getValidDots = function() {
+					return Math.abs(rx - x) < 5 && Math.abs(ry - y) < 5;
+				});
+			};
+
+			var getValidDots = function getValidDots() {
 				var dots = [];
-				for(var i=0;i < scope.dots.length;i++)
-				{	
-					if(scope.state.selectedDot == scope.dots[i])
-					{
+				for (var i = 0; i < scope.dots.length; i++) {
+					if (scope.state.selectedDot == scope.dots[i]) {
 						//console.log(i);
-						if(i === 0)
-						{
-							if(scope.dots[i+1].x <= scope.dots[i].x)
-								continue;
-						}
-						else if(i == scope.dots.length-1)
-						{
-							if(scope.dots[i-1].x >= scope.dots[i].x)
-								continue;
-						}
-						else {
-							if(scope.dots[i-1].x >= scope.dots[i].x || scope.dots[i+1].x <= scope.dots[i].x)
-								continue;
+						if (i === 0) {
+							if (scope.dots[i + 1].x <= scope.dots[i].x) continue;
+						} else if (i == scope.dots.length - 1) {
+							if (scope.dots[i - 1].x >= scope.dots[i].x) continue;
+						} else {
+							if (scope.dots[i - 1].x >= scope.dots[i].x || scope.dots[i + 1].x <= scope.dots[i].x) continue;
 						}
 					}
-					var dot = scope.dots[i];
-					if(dot.y < 0) dot.y=0;
-					if(dot.y > 1) dot.y=1;
-					dots.push(dot);
+					dots.push(scope.dots[i]);
 				}
-				
+
 				return dots;
-			}
-			
-			scope.redrawGrid= function(){
-				
+			};
+
+			scope.redrawGrid = function () {
+
 				var canvas = scope.gridCanvas;
 				var ctx = canvas.getContext('2d');
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				
-				for(var i =0;i<canvas.width;i+=10){
+
+				for (var i = 0; i < canvas.width; i += 10) {
 					ctx.moveTo(i, 0);
 					ctx.lineTo(i, scope.size.height);
 				}
-				for(var j =0;j<canvas.height;j+=10){
+				for (var j = 0; j < canvas.height; j += 10) {
 					ctx.moveTo(0, j);
 					ctx.lineTo(scope.size.width, j);
 				}
 				ctx.strokeStyle = '#ffffff';
 				ctx.lineWidth = 0.5;
 				ctx.stroke();
-				
-			}
-			
-			
-			scope.drawDots = function(){
-				
+			};
+
+			scope.drawDots = function () {
+
 				var canvas = scope.curveCanvas;
 				var ctx = canvas.getContext('2d');
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				var dots = getValidDots();
 				ctx.lineWidth = 1;
 
-				dots.forEach(dot=>{
+				dots.forEach(function (dot) {
 					ctx.beginPath();
-					if(dot === scope.state.selectedDot)
-						ctx.strokeStyle = '#ff0000';
-					else
-						ctx.strokeStyle = '#000000';
-					ctx.arc(dot.x*canvas.width, dot.y*canvas.height, 2, 0, 2*Math.PI);
+					if (dot === scope.state.selectedDot) ctx.strokeStyle = '#ff0000';else ctx.strokeStyle = '#000000';
+					ctx.arc(dot.x * canvas.width, dot.y * canvas.height, 2, 0, 2 * Math.PI);
 					ctx.stroke();
 				});
 
 				scope.drawLine(dots, ctx, canvas);
-			}
+			};
 
-			scope.drawLine= function(dots, ctx, scale){
-
-				var points = [];
-				
-				if(dots[0].x > 0){
-				  points.push(0, dots[0].y * scale.height);
-				}
-
-				dots.forEach(dot=>{
-					points.push(dot.x * scale.width);
-					points.push(dot.y * scale.height);
-				});
-				
-				if(dots[dots.length-1].x < 1){
-				  points.push(scale.width, dots[dots.length-1].y * scale.height)
-				}
-				
+			scope.drawLine = function (dots, ctx, scale) {
 				ctx.beginPath();
 				ctx.strokeStyle = '#000000';
-				ctx.curve(points, 0.5, 25, false);
+
+				if (dots[0].x > 0) {
+					ctx.moveTo(0, dots[0].y * scale.height);
+					ctx.lineTo(dots[0].x * scale.width, dots[0].y * scale.height);
+				}
+
+				for (var i = 0; i < dots.length - 1; i++) {
+					var dot1 = dots[i];
+					var dot2 = dots[i + 1];
+					ctx.moveTo(dot1.x * scale.width, dot1.y * scale.height);
+					ctx.lineTo(dot2.x * scale.width, dot2.y * scale.height);
+				}
+
+				if (dots[dots.length - 1].x < 1) {
+					ctx.moveTo(dots[dots.length - 1].x * scale.width, dots[dots.length - 1].y * canvas.height);
+					ctx.lineTo(scope.size.width, dots[dots.length - 1].y * scale.height);
+				}
 				ctx.stroke();
-			}
-			
-			element.ready(function(){
-				
+			};
+
+			element.ready(function () {
+
 				scope.size = {};
-				scope.state = {mode:null};
-				
-				 $timeout(function () {
-					 
+				scope.state = { mode: null };
+
+				$timeout(function () {
+
 					scope.gridCanvas = element.find('canvas')[0];
 					scope.curveCanvas = element.find('canvas')[1];
-					
+
 					scope.size.height = element.find('canvas')[0].offsetHeight;
 					scope.size.width = element.find('canvas')[0].offsetWidth;
-					
+
 					scope.gridCanvas.width = scope.size.width;
-					scope.gridCanvas.height= scope.size.height;
+					scope.gridCanvas.height = scope.size.height;
 					scope.curveCanvas.width = scope.size.width;
-					scope.curveCanvas.height= scope.size.height;
-					
-					element.on('mousedown', function(event){
-						
+					scope.curveCanvas.height = scope.size.height;
+
+					element.on('mousedown', function (event) {
+
 						var dot = findDot(event.offsetX, event.offsetY);
-						
-						if(!dot)
-							scope.state.selectedDot = addDot(event.offsetX, event.offsetY);
-						else
-							scope.state.selectedDot = dot;
-						
+
+						if (!dot) scope.state.selectedDot = addDot(event.offsetX, event.offsetY);else scope.state.selectedDot = dot;
+
 						scope.drawDots();
-						
 					});
-					
-					element.on('mousemove', function(event){
-						if(!!scope.state.selectedDot){
+
+					element.on('mousemove', function (event) {
+						if (!!scope.state.selectedDot) {
 							scope.state.selectedDot.x = event.offsetX / scope.size.width;
-							scope.state.selectedDot.y = event.offsetY / scope.size.height;	
+							scope.state.selectedDot.y = event.offsetY / scope.size.height;
 							scope.drawDots();
 						}
-						
-						var hoverDot = findDot(event.offsetX, event.offsetY);
-						if(!!hoverDot)
-						  element[0].style.cursor = "pointer";
-						else
-						  element[0].style.cursor = "default";
 					});
-					
-					
-					element.on('mouseup', function(event){
-						
-						if(!!event.ctrlKey){
+
+					element.on('mouseup', function (event) {
+
+						if (!!event.ctrlKey) {
 							scope.dots = getValidDots();
 							scope.dots.splice(scope.dots.indexOf(scope.state.selectedDot), 1);
-						}else{
+						} else {
 							scope.dots = getValidDots();
 						}
-						
+
 						scope.state.selectedDot = null;
-						scope.drawDots();	
+						scope.drawDots();
 						scope.$apply();
-						
 					});
-					
-					element.onResize = function(evt){
+
+					element.onResize = function (evt) {
 						scope.redrawGrid();
 						scope.drawDots();
-					}
-					
+					};
+
 					element.onResize();
-					
-				 });
-				
+				});
 			});
-			
 		},
-		controller:function($scope, $parse) {
-		  
-		  var getter = $parse($scope.dotData);
-		  console.log(getter);
-		  var setter = getter.assign;
-		  
-			$scope.$watch('dots', function(v){
-			  if(typeof setter == 'function')
-			    setter($scope.$parent, v);
+		controller: function controller($scope, $parse) {
+
+			var getter = $parse($scope.dotData);
+			console.log(getter);
+			var setter = getter.assign;
+
+			$scope.$watch('dots', function (v) {
+				if (typeof setter == 'function') setter($scope.$parent, v);
 			});
-			
+
 			$scope.dots = getter($scope.$parent);
-			if(!$scope.dots){
-				$scope.dots = [ {x:0, y:1}, {x:1, y:0} ];
+			if (!$scope.dots) {
+				$scope.dots = [{ x: 0, y: 1 }, { x: 1, y: 0 }];
 			}
-			
 		}
-	}
+	};
 });
