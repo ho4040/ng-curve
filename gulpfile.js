@@ -6,14 +6,13 @@ const gutil = require('gulp-util');
 const babel = require('gulp-babel');
 const del = require('del');
 
+gulp.task('default', ['build_css', 'build_js'], function() {
+  
+});
 
 gulp.task('clean', function(){
 	return del(['dist']);
-})
-
-gulp.task('default', ['build_css', 'build_js'], function() {
-  
-})
+});
 
 gulp.task('build_css', function(){
 	gulp.src('./src/*.css')
