@@ -4,10 +4,17 @@
   "authors": [
     "choi young <ho4040@nooslab.com>"
   ],
-  "description": "basic curve editor for angular 1",
+  "description": "simple curve editor for angular 1",
   "main": "src/ng-curve.js",
+  "dependencies":{
+    "cardinal-spline-js":">=0.0.1"
+  },
   "keywords": [
-    "curve"
+    "curve",
+    "angular",
+    "spline",
+    "cardinal",
+    "catmull-rom"
   ],
   "license": "MIT"
 }

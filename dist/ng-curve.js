@@ -52,7 +52,10 @@ angular.module('ngCurve', []).directive('curveEditor', function($timeout){
 								continue;
 						}
 					}
-					dots.push(scope.dots[i]);
+					var dot = scope.dots[i];
+					if(dot.y < 0) dot.y=0;
+					if(dot.y > 1) dot.y=1;
+					dots.push(dot);
 				}
 				
 				return dots;
@@ -96,31 +99,31 @@ angular.module('ngCurve', []).directive('curveEditor', function($timeout){
 					ctx.arc(dot.x*canvas.width, dot.y*canvas.height, 2, 0, 2*Math.PI);
 					ctx.stroke();
 				});
+
+				scope.drawLine(dots, ctx, canvas);
+			}
+
+			scope.drawLine= function(dots, ctx, scale){
+
+				var points = [];
+				
+				if(dots[0].x > 0){
+				  points.push(0, dots[0].y * scale.height);
+				}
+
+				dots.forEach(dot=>{
+					points.push(dot.x * scale.width);
+					points.push(dot.y * scale.height);
+				});
+				
+				if(dots[dots.length-1].x < 1){
+				  points.push(scale.width, dots[dots.length-1].y * scale.height)
+				}
 				
 				ctx.beginPath();
 				ctx.strokeStyle = '#000000';
-				
-				if(dots[0].x > 0)
-				{
-					ctx.moveTo(0, dots[0].y*canvas.height);
-					ctx.lineTo(dots[0].x*canvas.width, dots[0].y*canvas.height);
-				}
-				
-				for(var i=0;i<dots.length-1;i++){
-					var dot1 = dots[i];
-					var dot2 = dots[i+1];
-					ctx.moveTo(dot1.x*canvas.width, dot1.y*canvas.height);
-					ctx.lineTo(dot2.x*canvas.width, dot2.y*canvas.height);
-				}
-				
-				if(dots[dots.length-1].x < 1)
-				{
-					ctx.moveTo(dots[dots.length-1].x*canvas.width, dots[dots.length-1].y*canvas.height);
-					ctx.lineTo(scope.size.width, dots[dots.length-1].y*canvas.height);
-				}
-				
+				ctx.curve(points, 0.5, 25, false);
 				ctx.stroke();
-				
 			}
 			
 			element.ready(function(){
@@ -160,6 +163,12 @@ angular.module('ngCurve', []).directive('curveEditor', function($timeout){
 							scope.state.selectedDot.y = event.offsetY / scope.size.height;	
 							scope.drawDots();
 						}
+						
+						var hoverDot = findDot(event.offsetX, event.offsetY);
+						if(!!hoverDot)
+						  element[0].style.cursor = "pointer";
+						else
+						  element[0].style.cursor = "default";
 					});
 					
 					
