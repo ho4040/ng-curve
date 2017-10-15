@@ -1,5 +1,5 @@
 
-## ng-curve
+# ng-curve
 
 Curve edit control. Directive that is created for AngularJS 1.
 
