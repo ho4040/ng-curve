@@ -8,7 +8,26 @@
 		
 		<script>
 			angular.module('app', ['ngCurve']).controller('MainCtrl', function($scope){
+				$scope.dataList = [];	
+
+				//Line
+				$scope.dataList[0] = [{x:0,y:1}, {x:1, y:0}];
 				
+				//Curve
+				$scope.dataList[1] = [{x:0,y:0}, {x:0.5, y:1}, {x:1, y:0}];
+
+				//Exp
+				$scope.dataList[2] = [];
+				for(var i=0;i<=5;i++){
+					$scope.dataList[2].push({x:0.2*i, y:1-Math.pow((0.2*i), 3)});	
+				}
+				
+				//Wave
+				$scope.dataList[3] = [];
+				for(var i=0;i<=5;i++){
+					var theta = i*Math.PI;					
+					$scope.dataList[3].push({x:0.2*i, y:(Math.cos(theta)*0.1)+0.5});	
+				}
 			});
 		</script>
 	</head>
@@ -16,11 +35,20 @@
 	<body ng-app="app" style="margin-top:20px;">
 		<h1>TEST</h1>
 		<div ng-controller="MainCtrl">
-			<curve-editor dot-data="input.dots"></curve-editor>
-			<div ng-repeat="dot in input.dots track by $index">
-				{{$index}} : {{dot.x | number:2}}, {{dot.y | number:2}}
+			<div ng-repeat="dots in dataList track by $index" style="display:flex;font-size:0.9rem;">
+				<span>
+					<curve-editor dot-data="dots"></curve-editor>
+				</span>
+				<span style="padding:10px;">
+					<div ng-repeat="dot in dots track by $index">
+						{{$index}} : x={{dot.x | number:2}}, y={{dot.y | number:2}}
+					</div>
+				</span>
 			</div>
+
 		</div>
+
+
 	</body>
 
 </html>
